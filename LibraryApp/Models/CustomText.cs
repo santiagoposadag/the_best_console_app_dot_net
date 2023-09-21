@@ -1,0 +1,8 @@
+
+
+namespace LibraryApp.Models;
+public class CustomText
+{
+    public string Language { get; set; }
+    public Dictionary<string, string> Transaltions { get; set; }
+}
