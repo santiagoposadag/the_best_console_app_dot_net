@@ -11,6 +11,11 @@ public class Messages
         _log = log;
     }
 
+    public string Greeting(string language){
+        string output = LookUpCustomText("Greeting", language);
+        return output;
+    }
+
     private string LookUpCustomText(string key, string language){
         JsonSerializerOptions oprtions = new(){
             PropertyNameCaseInsensitive = true
@@ -22,6 +27,13 @@ public class Messages
                                 (
                                     File.ReadAllText("CustomText.jason")
                                 );
+            CustomText? message = messageSets.Where(x => x.Language == language).First();
+            
+            if(message is null){
+                throw new NullReferenceException("The specified language is not available");
+            }
+
+            return message.Transaltions[key];
         }
         catch (Exception ex)
         {
